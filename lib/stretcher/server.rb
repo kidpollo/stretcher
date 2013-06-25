@@ -38,17 +38,6 @@ module Stretcher
     # Builds a logger when initializing an instance
     def self.build_logger(options)
       logger = options[:logger] || Logger.new(STDOUT)
-      log_level = options[:log_level] || :warn
-      logger.level = Logger.const_get(log_level.to_s.upcase)
-
-      # We don't want to override the formatter if an external logger is used
-      unless options[:logger]
-        logger.formatter = proc do |severity, datetime, progname, msg|
-          "[Stretcher][#{severity}]: #{msg}\n"
-        end
-      end
-      
-      logger
     end
 
     # Instantiate a new instance in a manner convenient for using the block syntax.
